@@ -1,6 +1,4 @@
-import { useState } from "react";
 import useLocalStorage from "../../Hooks/useLocalStorageApp";
-import { connect } from "react-redux";
 
 
 import Title from "../Title/Title";
@@ -15,7 +13,7 @@ import { Container } from "../Contacts/Contacts.styled";
 
 
 
-function App() {
+export default function App() {
   // const [filter, setFilter] = useState('')
 
   const phonebookName = [ 
@@ -65,5 +63,5 @@ function App() {
     )
 }
 
-export default connect()(App)
+
 

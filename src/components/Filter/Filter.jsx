@@ -1,10 +1,8 @@
 import { connect } from "react-redux";
 import actions from "../../redux/phonebook/phonebook-actions";
-import { useState } from "react";
 
 
 function Filter({ value, onChange }) {
-    const [filter, setFilter] = useState('')
 
     return (
         <label>
@@ -14,18 +12,21 @@ function Filter({ value, onChange }) {
     );
 }
 
-const getVisibleFilter = () => {
+// const getVisibleFilter = () => {
+//     const nrlzdFilter = filter.toLowerCase();
+//     return contacts.filter(contact => contact.name.toLowerCase().includes(nrlzdFilter))
+//   }
+
+
+const mapStateToProps = state => {
+    const {filter, items} = state.contacts
     const nrlzdFilter = filter.toLowerCase();
-    return contacts.filter(contact => contact.name.toLowerCase().includes(nrlzdFilter))
-  }
-
-
-const mapStateToProps = state => ({
+    const visibleContacts = items.filter(({name}) => name.toLowerCase().includes(nrlzdFilter))
 
     return {
-        value: state.contacts.filter,
+        value: visibleContacts,
     }
-})
+}
 
 const mapDispatchToProps = dispatch => ({
     onChange: evt => dispatch(actions.FilterContact(evt.target.value))

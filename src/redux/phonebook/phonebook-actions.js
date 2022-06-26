@@ -16,4 +16,5 @@ const FilterContact = (value) => ({
   payload: value,
 });
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default { AddContact, DeleteContact, FilterContact };
