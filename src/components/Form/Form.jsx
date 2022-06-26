@@ -1,12 +1,14 @@
 import { FormBox, InputName, InputNumber } from "./Form.styled";
 import useLocalStorage from "../../Hooks/useLocalStorageForm";
+import { connect } from "react-redux";
+import actions from "../../redux/phonebook/phonebook-actions";
 
 
-export default function Form({onSubmit}) {
+function Form({onSubmit}) {
   const [name, setName] = useLocalStorage('name', '')
-
   const [number, setNumber] = useLocalStorage('number', '')
 
+  
   const handleChangeName = event => {
     setName(event.currentTarget.value)
     console.log(`Имя: ${name}`)
@@ -51,63 +53,13 @@ export default function Form({onSubmit}) {
         <button type="submit">Add contacts</button>
       </FormBox>
     )
- }
+}
+
+const mapDispatchToProps = dispatch => ({
+  onSubmit: obj => dispatch(actions.AddContact(obj))  
+})
+
+export default connect(null, mapDispatchToProps)(Form)
  
-// export default class Form extends React.Component {
-//     state = {
-//         name: '',
-//         number: ''  
-//     }
 
-//     handleChange = (event) => {
-//     const {name, number} = event.currentTarget  
-
-//     this.setState({
-//       [name]: event.currentTarget.value,
-//       [number]: event.currentTarget.value
-//     })
-//       console.log(`name: ${this.state.name}`)
-//   }
-   
-//   handleSubmit = e => {
-//     e.preventDefault();
-   
-//     this.props.onSubmit(this.state); 
-//     this.reset(); 
-//   }
-
-//   reset = () => {
-//     this.setState({ name: ' ', number: ' ' });
-//   }
-    
-//   render() {
-//     return (
-//       <FormBox onSubmit={this.handleSubmit}>
-//              Name
-//             <InputName
-//                  type="text"
-//                  name="name"
-//                  pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-//                  title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-//                  required
-//                  value={this.state.name}
-//                  onChange={this.handleChange}
-//              />
-            
-//              Number
-//              <InputNumber
-//                  type="tel"
-//                  name="number"
-//                  pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-//                  title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-//                  required
-//                  value={this.state.number}
-//                  onChange={this.handleChange}
-//              />
-            
-//         <button type="submit">Add contacts</button>
-//       </FormBox>
-//     )
-//   }
-// }
 

@@ -1,7 +1,9 @@
 import React from "react";
-import {Ul, Li, Box, Button, P} from "../Contacts/Contacts.styled"
+import { Ul, Li, Box, Button, P } from "../Contacts/Contacts.styled"
+import { connect } from "react-redux";
+import actions from "../../redux/phonebook/phonebook-actions";
 
-export default function Contacts({ contacts, removeContact }) {
+const Contacts = ({ contacts, removeContact }) => {
     return (
             <Box>
                 <Ul>
@@ -18,5 +20,13 @@ export default function Contacts({ contacts, removeContact }) {
     );
 }
 
+const mapStateToProps = state => ({
+    contacts: state.contacts.items,
+})
 
+const mapDispatchToProps = dispatch => ({
+    removeContact: (contactId) => dispatch(actions.DeleteContact(contactId)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Contacts)
 

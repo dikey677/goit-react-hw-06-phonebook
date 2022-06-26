@@ -1,15 +1,22 @@
-import {useState} from "react";
-import { nanoid } from "nanoid";
-import { Container } from "../Contacts/Contacts.styled"
+import { useState } from "react";
+import useLocalStorage from "../../Hooks/useLocalStorageApp";
+import { connect } from "react-redux";
+
+
 import Title from "../Title/Title";
 import Form from "../Form/Form";
 import Contacts from "../Contacts/Contacts";
 import Filter from "../Filter/Filter";
-import useLocalStorage from "../../Hooks/useLocalStorageApp";
+import { Container } from "../Contacts/Contacts.styled";
 
 
-export default function App() {
-  const [filter, setFilter] = useState('')
+// redux
+
+
+
+
+function App() {
+  // const [filter, setFilter] = useState('')
 
   const phonebookName = [ 
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -20,39 +27,43 @@ export default function App() {
   
   const [contacts, setContacts] = useLocalStorage('contacts', phonebookName)
 
-  const formSubmitHandler = onSubmit => {
-    console.log(onSubmit)
-    let currentContact = contacts.map(contact => contact.name.toLowerCase());
-    let setNewContact = { id: nanoid(10), ...onSubmit }
-    currentContact.includes(onSubmit.name.toLowerCase()) ? alert(`${onSubmit.name} is already in your contacts`) : setContacts([setNewContact, ...contacts])
-  }
+  // actions
 
-  const changeFilterHandler = event => {
-    setFilter(event.currentTarget.value)
-  }
+  // const AddContact = onSubmit => {
+  //   console.log(onSubmit)
+  //   let currentContact = contacts.map(contact => contact.name.toLowerCase());
+  //   let setNewContact = { id: nanoid(10), ...onSubmit }
+  //   currentContact.includes(onSubmit.name.toLowerCase()) ? alert(`${onSubmit.name} is already in your contacts`) : setContacts([setNewContact, ...contacts])
+  // }
 
-  const getVisibleFilter = () => {
-    const nrlzdFilter = filter.toLowerCase();
-    return contacts.filter(contact => contact.name.toLowerCase().includes(nrlzdFilter))
-  }
+  // const changeFilterHandler = event => {
+  //   setFilter(event.currentTarget.value)
+  // }
 
-  const removeContact = index => {
-    setContacts(prevState => prevState.filter(contact => contact.id !== index))
-  }
+  // const getVisibleFilter = () => {
+  //   const nrlzdFilter = filter.toLowerCase();
+  //   return contacts.filter(contact => contact.name.toLowerCase().includes(nrlzdFilter))
+  // }
+
+  // const removeContact = index => {
+  //   setContacts(prevState => prevState.filter(contact => contact.id !== index))
+  // }
 
   return (
       <section>
         <Title title='Phonebook' />
-        <Form onSubmit={formSubmitHandler} />
+        <Form />
         <Container>
           <div> 
             <Title title='Contacts' />
-            <Filter filter={filter} onChange={changeFilterHandler}/>
+            <Filter />
           </div>
           
-          <Contacts contacts={getVisibleFilter()} removeContact={removeContact} />
+          <Contacts />
         </Container>  
       </section>
     )
 }
+
+export default connect()(App)
 
