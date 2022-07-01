@@ -1,21 +1,14 @@
 import useLocalStorage from "../../Hooks/useLocalStorageApp";
 
-
 import Title from "../Title/Title";
 import Form from "../Form/Form";
 import Contacts from "../Contacts/Contacts";
 import Filter from "../Filter/Filter";
 import { Container } from "../Contacts/Contacts.styled";
 
-
 // redux
 
-
-
-
 export default function App() {
-  // const [filter, setFilter] = useState('')
-
   const phonebookName = [ 
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -24,28 +17,6 @@ export default function App() {
   ]
   
   const [contacts, setContacts] = useLocalStorage('contacts', phonebookName)
-
-  // actions
-
-  // const AddContact = onSubmit => {
-  //   console.log(onSubmit)
-  //   let currentContact = contacts.map(contact => contact.name.toLowerCase());
-  //   let setNewContact = { id: nanoid(10), ...onSubmit }
-  //   currentContact.includes(onSubmit.name.toLowerCase()) ? alert(`${onSubmit.name} is already in your contacts`) : setContacts([setNewContact, ...contacts])
-  // }
-
-  // const changeFilterHandler = event => {
-  //   setFilter(event.currentTarget.value)
-  // }
-
-  // const getVisibleFilter = () => {
-  //   const nrlzdFilter = filter.toLowerCase();
-  //   return contacts.filter(contact => contact.name.toLowerCase().includes(nrlzdFilter))
-  // }
-
-  // const removeContact = index => {
-  //   setContacts(prevState => prevState.filter(contact => contact.id !== index))
-  // }
 
   return (
       <section>

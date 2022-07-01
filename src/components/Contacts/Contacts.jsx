@@ -20,9 +20,19 @@ const Contacts = ({ contacts, removeContact }) => {
     );
 }
 
-const mapStateToProps = state => ({
-    contacts: state.contacts.items,
-})
+const getVisibleItems = (allItems, filter) => {
+    const nrlzdFilter = filter.toLowerCase();
+    return allItems.filter(contact => contact.name.toLowerCase().includes(nrlzdFilter));
+}
+
+const mapStateToProps = state => {
+    const { filter, items } = state.contacts;
+    const visibleItems = getVisibleItems(items, filter)
+
+    return {
+        contacts: visibleItems,
+    }
+}
 
 const mapDispatchToProps = dispatch => ({
     removeContact: (contactId) => dispatch(actions.DeleteContact(contactId)),
