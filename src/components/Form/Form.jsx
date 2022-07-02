@@ -11,12 +11,12 @@ function Form({onSubmit}) {
   
   const handleChangeName = event => {
     setName(event.currentTarget.value)
-    console.log(`Имя: ${name}`)
+    // console.log(`Имя: ${name}`)
   }
 
    const handleChangeNumber = event => {
     setNumber(event.currentTarget.value)
-    console.log(`Номер: ${number}`)
+    // console.log(`Номер: ${number}`)
   }
 
   const handleSubmit = event => {
