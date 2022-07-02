@@ -1,22 +1,20 @@
 import { FormBox, InputName, InputNumber } from "./Form.styled";
-import useLocalStorage from "../../Hooks/useLocalStorageForm";
 import { connect } from "react-redux";
 import actions from "../../redux/phonebook/phonebook-actions";
+import { useState } from "react";
 
 
 function Form({onSubmit}) {
-  const [name, setName] = useLocalStorage('name', '')
-  const [number, setNumber] = useLocalStorage('number', '')
+  const [name, setName] = useState('')
+  const [number, setNumber] = useState('')
 
   
   const handleChangeName = event => {
     setName(event.currentTarget.value)
-    // console.log(`Имя: ${name}`)
   }
 
    const handleChangeNumber = event => {
     setNumber(event.currentTarget.value)
-    // console.log(`Номер: ${number}`)
   }
 
   const handleSubmit = event => {
